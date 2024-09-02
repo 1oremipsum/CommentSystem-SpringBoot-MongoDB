@@ -18,7 +18,7 @@ public class Instantiation implements CommandLineRunner{
 
     @Override
     public void run(String... args) throws Exception {
-        //userRepository.deleteAll();
+        userRepository.deleteAll();
         
         for (User u : instantiateUsers()) {
             userRepository.save(u);
@@ -28,6 +28,7 @@ public class Instantiation implements CommandLineRunner{
     private List<User> instantiateUsers(){
         List<User> list = new ArrayList<>();
         list.add(new User(null, "Alex Green", "alex@gmail.com"));
+        list.add(new User(null, "Allan Sanches", "allan@gmail.com"));
         list.add(new User(null, "Bob Grey", "bob@gmail.com"));
         list.add(new User(null, "Maria Brown", "maria@gmail.com"));
         return list;
