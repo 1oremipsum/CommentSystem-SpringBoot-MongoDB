@@ -14,6 +14,9 @@ import com.commentsystem.system.dto.UserDTO;
 import com.commentsystem.system.service.UserService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 
 
@@ -48,6 +51,14 @@ public class UserResource {
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable String id) {
         service.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Void> update(@PathVariable String id, @RequestBody UserDTO entity) { 
+        User obj = service.fromDTO(entity);
+        obj.setId(id);
+        service.update(obj);
         return ResponseEntity.noContent().build();
     }
 }
