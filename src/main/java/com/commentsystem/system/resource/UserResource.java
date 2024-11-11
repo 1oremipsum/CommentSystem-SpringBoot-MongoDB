@@ -17,9 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-
-
-
 @RestController
 @RequestMapping(value="/users")
 public class UserResource {
@@ -59,6 +56,7 @@ public class UserResource {
         User obj = service.fromDTO(entity);
         obj.setId(id);
         service.update(obj);
+        System.out.println();
         return ResponseEntity.noContent().build();
     }
 }
