@@ -25,6 +25,9 @@ public class Instantiation implements CommandLineRunner{
 
     @Override
     public void run(String... args) throws Exception {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+
         userRepository.deleteAll();
         postRepository.deleteAll();
 
@@ -33,14 +36,14 @@ public class Instantiation implements CommandLineRunner{
         User u3 = new User(null, "Bob Grey", "bob@gmail.com");
         User u4 = new User(null, "Maria Brown", "maria@gmail.com");
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-
         userRepository.saveAll(Arrays.asList(u1, u2, u3, u4));
-        
+
         Post post1 = new Post(null, sdf.parse("10/11/2024"), "Partiu férias!", "Vou viajar para o Rio de Janeiro. Abraços!", new AuthorDTO(u4));
         Post post2 = new Post(null, sdf.parse("11/11/2024"), "Bom dia", "Acordei feliz hoje!", new AuthorDTO(u4));
 
         postRepository.saveAll(Arrays.asList(post1, post2));
+
+        u4.addPosts(Arrays.asList(post1, post2));
+        userRepository.save(u4);
     }
 }
