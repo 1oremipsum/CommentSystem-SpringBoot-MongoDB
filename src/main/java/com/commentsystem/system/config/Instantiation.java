@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.commentsystem.system.domain.Post;
 import com.commentsystem.system.domain.User;
+import com.commentsystem.system.dto.AuthorDTO;
 import com.commentsystem.system.repository.PostRepository;
 import com.commentsystem.system.repository.UserRepository;
 
@@ -35,10 +36,11 @@ public class Instantiation implements CommandLineRunner{
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
 
-        Post post1 = new Post(null, sdf.parse("10/11/2024"), "Partiu férias!", "Vou viajar para o Rio de Janeiro. Abraços!", u4);
-        Post post2 = new Post(null, sdf.parse("11/11/2024"), "Bom dia", "Acordei feliz hoje!", u4);
-
         userRepository.saveAll(Arrays.asList(u1, u2, u3, u4));
+        
+        Post post1 = new Post(null, sdf.parse("10/11/2024"), "Partiu férias!", "Vou viajar para o Rio de Janeiro. Abraços!", new AuthorDTO(u4));
+        Post post2 = new Post(null, sdf.parse("11/11/2024"), "Bom dia", "Acordei feliz hoje!", new AuthorDTO(u4));
+
         postRepository.saveAll(Arrays.asList(post1, post2));
     }
 }
