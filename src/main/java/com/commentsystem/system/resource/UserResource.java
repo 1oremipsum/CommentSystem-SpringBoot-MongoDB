@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.commentsystem.system.domain.Post;
 import com.commentsystem.system.domain.User;
 import com.commentsystem.system.dto.UserDTO;
 import com.commentsystem.system.service.UserService;
@@ -58,5 +59,11 @@ public class UserResource {
         service.update(obj);
         System.out.println();
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+       User obj = service.findById(id);
+       return ResponseEntity.ok().body(obj.getPosts());
     }
 }
